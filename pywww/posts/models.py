@@ -13,3 +13,7 @@ class Post(models.Model):
   # data utworzenia - tylko przy utworzeniu
   modified = models.DateTimeField(auto_now=True)
   # data modyfikacji - zawsze po kliknięciu save
+  def __str__(self):
+    # metoda specjalna służąca do przygotowania reprezentacji
+    # tekstowej naszego obiektu. Zmiana w widoku jak i w PA
+    return f"{self.id} {self.title}"

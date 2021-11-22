@@ -31,12 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Django applications
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Django applications installed from external modules
+    'django_extensions',
+    # My applications
     'posts.apps.PostsConfig',
     'books.apps.BooksConfig',
 ]
@@ -125,3 +129,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Printing in console SQL's queries
+# https://django-extensions.readthedocs.io/en/latest/shell_plus.html
+
+SHELL_PLUS_PRINT_SQL = True
