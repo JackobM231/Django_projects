@@ -14,4 +14,8 @@ class Book(models.Model):
   # autor książki
   created = models.DateTimeField(auto_now_add=True)
   # data utworzenia - tylko przy utworzeniu
+  def __str__(self):
+    # metoda specjalna służąca do przygotowania reprezentacji
+    # tekstowej naszego obiektu. Zmiana w widoku jak i w PA
+    return f"{self.id} {self.title}"
   

@@ -38,11 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     # Django applications installed from external modules
     'django_extensions',
+    
     # My applications
     'posts.apps.PostsConfig',
     'books.apps.BooksConfig',
+    'main.apps.MainConfig',
 ]
 
 MIDDLEWARE = [

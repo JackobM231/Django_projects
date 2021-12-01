@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Title</title>
+  </head>
+
+  <body>
+
+    <h1>Lista książek:</h1>
+    <ul>
+      {% for book in books %}
+        <li>{{book.title}}</li>
+      {% endfor %}
+    </ul>
+
+    <p>Książki dostępne:</p>
+    <ol>
+      {% for avilable_book in avilable_books %}
+        <li>{{avilable_book.title}}</li>
+      {% endfor %}
+    </ol>
+    
+    <p>Książki niedostępne:</p>
+    <ol>
+      {% for unavilable_book in unavilable_books %}
+        <li>{{unavilable_book.title}}</li>
+      {% endfor %}
+    </ol>
+    <p>Chwilowy brak nakładu</p>
+    
+  </body>
+
+</html>

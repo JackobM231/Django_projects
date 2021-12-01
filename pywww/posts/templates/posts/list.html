@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>List of posts</title>
+  </head>
+
+  <body>
+
+    <h1>Lista postów:</h1>
+    <ul>
+      {% for post in posts_list %}
+        <li>{{post}}</li>
+      {% endfor %}
+    </ul>
+
+    <p>Liczba postów: {{posts_number}}</p>
+    
+    <p>Lista:</p>
+    {% for topic in topics %}
+    <li>{{topic}}</li>
+    {% endfor %}
+    
+  </body>
+
+</html>
