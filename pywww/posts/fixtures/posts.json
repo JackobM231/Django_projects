@@ -1,0 +1,50 @@
+[
+{
+  "model": "posts.post",
+  "pk": 1,
+  "fields": {
+    "title": "First Post",
+    "content": "Jest to pierwszy post",
+    "published": true,
+    "created": "2021-11-18T12:26:12.064Z",
+    "modified": "2021-11-22T13:48:24.453Z",
+    "sponsored": false
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 2,
+  "fields": {
+    "title": "Second post",
+    "content": "Jest to drugi post",
+    "published": false,
+    "created": "2021-11-18T12:29:40.639Z",
+    "modified": "2021-11-22T13:48:34.512Z",
+    "sponsored": false
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 3,
+  "fields": {
+    "title": "Third post",
+    "content": "Jest to trzeci post",
+    "published": false,
+    "created": "2021-11-22T13:49:08.771Z",
+    "modified": "2021-11-22T13:49:08.772Z",
+    "sponsored": true
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 4,
+  "fields": {
+    "title": "Fourth post",
+    "content": "Jest to czwarty post",
+    "published": true,
+    "created": "2021-12-01T15:40:56.735Z",
+    "modified": "2021-12-01T15:40:56.735Z",
+    "sponsored": true
+  }
+}
+]

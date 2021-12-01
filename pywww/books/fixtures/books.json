@@ -1,0 +1,38 @@
+[
+{
+  "model": "books.book",
+  "pk": 1,
+  "fields": {
+    "title": "Wojna w Kosmosie",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sagittis, lectus sed facilisis pulvinar, quam quam luctus mi, eu suscipit massa felis ac mauris. Nulla ut nisi urna. Mauris est arcu, tincidunt vitae iaculis eget, sodales ac odio.",
+    "available": true,
+    "publication_year": 2021,
+    "author": "dr Jacek Bartosiak",
+    "created": "2021-11-18T13:55:57.874Z"
+  }
+},
+{
+  "model": "books.book",
+  "pk": 2,
+  "fields": {
+    "title": "Hobbit, czyli tam i z powrotem",
+    "description": "Opowiada o wyprawie podjêtej przez krasnoludów tworz¹cych kompaniê Thorina i towarzysz¹cego im hobbita nazwiskiem Bilbo Baggins do zajmowanej przez smoka Smauga Samotnej Góry w celu odzyskania zagarniêtych skarbów i dawnej siedziby krasnoludów. Po drodze, w jaskini Golluma, Bilbo Baggins znajduje pierœcieñ, który daje mu moc bycia niewidzialnym",
+    "available": true,
+    "publication_year": null,
+    "author": "Tolkien John Ronald Reuel",
+    "created": "2021-11-18T14:06:04.000Z"
+  }
+},
+{
+  "model": "books.book",
+  "pk": 3,
+  "fields": {
+    "title": "Ma³y_Ksi¹¿e",
+    "description": "S³odko-gorzka historia podró¿uj¹cego ma³ego ch³opca w kosmosie",
+    "available": false,
+    "publication_year": 1943,
+    "author": "Antoine de Saint-Exupery",
+    "created": "2021-11-19T19:51:49.515Z"
+  }
+}
+]

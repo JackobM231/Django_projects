@@ -28,4 +28,3 @@ def posts_details(request):
   context = {"post": post}
   return render(request, "posts/details.html", context)
 
-  
