@@ -12,7 +12,11 @@
     <h1>Lista postów:</h1>
     <ul>
       {% for post in posts_list %}
-        <li>{{post}}</li>
+        <li>{{post}} 
+          {% if post.sponsored %}
+            (sponsorowany)
+          {% endif %}
+        </li>
       {% endfor %}
     </ul>
 
