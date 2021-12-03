@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table of books</title>
+
+  <style>
+    table, th, td {
+      border: 1px solid;
+      border-collapse: collapse;
+      border-color: black;
+    }
+
+    th {
+      min-width: 15vw;
+    }
+
+    .table__row--marked:hover {
+      background-color: rgb(99, 99, 99);
+      color: rgb(255, 255, 255);
+    }
+
+  </style>
+
+
+</head>
+
+<body>
+  <h1>Books in our library</h1>
+  <br>
+  <h2>Table</h2>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Publication year</th>
+      <th>Availability</th>
+    </tr>
+    {% for book in books %}
+      <tr class="table__row--marked">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.publication_year }}</td>
+        {% if book.available == True %}
+          <td>On the shelf</td>
+        {% else %}
+          <td>Lended out</td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+  </table>
+</body>
+
+</html>

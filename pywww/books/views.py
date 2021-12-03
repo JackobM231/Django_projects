@@ -10,3 +10,8 @@ def books_list(request):
   books = Book.objects
   context = {'books': all_books, 'unavilable_books': books.filter(available="0"), 'avilable_books': books.filter(available="1")}
   return render(request, 'books/store.html', context)
+
+def books_table(request):
+  books = Book.objects.all()
+  context = {'books': books}
+  return render(request, 'books/books_table.html', context)

@@ -9,7 +9,7 @@ def create_posts(n=10):
     d = fake.date_time_this_year()
     # zdefiniowana data utworzenia
     post = Post(
-      title = fake.text(randint(10, 30)),
+      title = fake.text(randint(10, 30))[:-1],
       content = fake.text(randint(50, 300)),
       published = fake.boolean(),
       created =  d,

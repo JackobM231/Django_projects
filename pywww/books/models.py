@@ -17,5 +17,5 @@ class Book(models.Model):
   def __str__(self):
     # metoda specjalna służąca do przygotowania reprezentacji
     # tekstowej naszego obiektu. Zmiana w widoku jak i w PA
-    return f"{self.id} {self.title}"
+    return f"{self.id}.. {self.title}"
   
