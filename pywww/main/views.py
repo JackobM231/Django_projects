@@ -4,5 +4,8 @@ from django.shortcuts import render
 
 
 # Create your views here.
-def hello_word(request):
-  return render(request, 'main/about.html', {'text': "Hello Word!"})
+def hello_world(request):
+  return render(request, 'main/hello_world.html', {'text': "Hello Word!"})
+
+def about(request):
+  return render(request, 'main/about.html')

@@ -1,32 +1,26 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 
-<html lang="en">
+{% block title %}Lista postów{% endblock %}
 
-  <head>
-    <meta charset="utf-8">
-    <title>List of posts</title>
-  </head>
+{% block body %}
 
-  <body>
-
-    <h1>Lista postów:</h1>
-    <ul>
-      {% for post in posts_list %}
-        <li>{{post}} 
-          {% if post.sponsored %}
-            (sponsorowany)
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-
-    <p>Liczba postów: {{posts_number}}</p>
-    
-    <p>Lista:</p>
-    {% for topic in topics %}
-    <li>{{topic}}</li>
+  <h1>Lista postów:</h1>
+  <ol>
+    {% for post in posts_list %}
+      <li>
+        <a href ="{% url 'posts:post_details' post.id %}" target="_blank">{{post.title}}</a> 
+        {% if post.sponsored %}
+          (sponsorowany)
+        {% endif %}
+      </li>
     {% endfor %}
-    
-  </body>
+  </ol>
 
-</html>
+  <p>Liczba postów: {{posts_number}}</p>
+  
+  <p>Lista:</p>
+  {% for topic in topics %}
+  <li>{{topic}}</li>
+  {% endfor %}
+    
+{% endblock %}

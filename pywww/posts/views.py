@@ -23,8 +23,8 @@ def posts_list(request):
 #               </div>'''
 #   return HttpResponse(html)
 
-def posts_details(request):
-  post = Post.objects.first()
+def post_details(request, post_id):
+  post = Post.objects.get(id=post_id)
   context = {"post": post}
   return render(request, "posts/details.html", context)
 
