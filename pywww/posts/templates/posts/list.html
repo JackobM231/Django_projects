@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
+{% load static %}
+{% block style %}<link rel="stylesheet" href={% static "posts/css/style.css" %}>{% endblock %}
+
 {% block title %}Lista postów{% endblock %}
 
 {% block body %}
 
-  <h1>Lista postów:</h1>
+  <h2>Lista postów:</h2>
   <ol>
     {% for post in posts_list %}
       <li>

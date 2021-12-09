@@ -1,0 +1,7 @@
+body {
+  background-color: rgb(194, 159, 136);
+}
+
+ol>li:nth-child(even) {
+  background-color: rgb(152, 132, 184)
+}
