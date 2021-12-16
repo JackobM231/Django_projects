@@ -15,7 +15,12 @@ class Post(models.Model):
   # data modyfikacji - zawsze po kliknięciu save
   sponsored = models.BooleanField(default=False)
   # post sponsorowany
+  author = models.ForeignKey("auth.User", on_delete=models.CASCADE, related_name="posts")
+  # relacja postu z autorem którym jest id usera
+  
   def __str__(self):
     # metoda specjalna służąca do przygotowania reprezentacji
     # tekstowej naszego obiektu. Zmiana w widoku jak i w PA
     return f"{self.id} {self.title}"
+  
+ 
