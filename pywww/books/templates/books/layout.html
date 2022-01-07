@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={% static "books/css/style.css" %}>
+    {% block style %}{% endblock %}
+
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+
+  <body>
+    <header class="header">
+      <h2 class="header__title">Old Bookstore</h2>
+      <ul class="header__nav">
+        <li class="nav__page">
+          <a href="{% url 'books:list' %}">List of books</a>
+        </li>
+        <li class="nav__page">
+          <a href="{% url 'books:table' %}">Main table</a>
+        </li>
+        <li class="nav__page">
+          <img class="header__title-img" src={% static "books/img/title-books.png" %} alt="Logo">
+        </li>
+      </ul>
+    </header>
+
+    {% block body %}{% endblock %}
+
+  </body>
+
+  {%block script %}{% endblock %}
+
+</html>

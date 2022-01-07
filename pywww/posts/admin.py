@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Category
 
 # Register your models here.
 
@@ -13,4 +13,7 @@ class PostAdmin(admin.ModelAdmin): # Wygląd i zachowanie w PA
   # Możliwość ustawienia filtrów na pasku po lewej
 
 admin.site.register(Post, PostAdmin)
+# rejestracja modeli w panelu administracyjnym (sprawienie że są widoczne)
+
+admin.site.register(Category)
 # rejestracja modeli w panelu administracyjnym (sprawienie że są widoczne)

@@ -1,0 +1,42 @@
+{% extends "books/layout.html" %}
+
+{% block title %}Book's details{% endblock %}
+
+{% block style %}
+  <style>
+    .container {
+      margin: 1rem;
+      padding-left: 1rem;
+    }
+    .book__details {
+      list-style: none;
+      margin: 0.5rem;
+    }
+    .book__details--detail {
+      padding: 0.5rem;
+    }
+  </style>
+{% endblock %}
+
+
+{% block body %}
+  <div class="container">
+    <h1 class="book__title">
+      {{book.id}}.
+      {{book.title}}
+    </h1>
+    <h2 class="book__details">Details:</h2>
+    <ul class="book__details">
+      <li class="book__details--detail">Author: <br>{{book.author}}</li>
+      <li class="book__details--detail">Publication Year: <br>{{book.publication_year}}</li>
+      <li class="book__details--detail">Description: <br>{{book.description}}</li>
+      <li class="book__details--detail">Availability: <br>
+        {% if book.available == True %}
+          Available
+        {% else %}
+          Unavailable
+        {% endif %}
+      </li>
+    </ul>
+  </div>
+{% endblock %}

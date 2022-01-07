@@ -1,0 +1,35 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: rgba(124, 91, 19, .3);
+  padding: 0.5rem;
+}
+    .header__nav {
+      display: flex;
+      align-items: center;
+
+      list-style: none;
+    }
+        .nav__page {
+          margin-left: 3rem;
+        }
+            .nav__page > a {
+              text-decoration: none;
+              text-transform: uppercase;
+            }
+            .nav__page > a:hover {
+              text-decoration: underline;
+            }
+        .header__title-img {
+          height: 5rem;
+        }

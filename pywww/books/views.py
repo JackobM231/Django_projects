@@ -15,3 +15,8 @@ def books_table(request):
   books = Book.objects.all()
   context = {'books': books}
   return render(request, 'books/books_table.html', context)
+
+def details(request, book_id):
+  book = Book.objects.get(id=book_id)
+  context = {'book': book}
+  return render(request, 'books/details.html', context)

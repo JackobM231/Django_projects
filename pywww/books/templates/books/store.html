@@ -1,14 +1,17 @@
-<!DOCTYPE html>
+{% extends "books/layout.html" %}
 
-<html lang="en">
+{% block style %}
+  <style>
 
-  <head>
-    <meta charset="utf-8">
-    <title>Title</title>
-  </head>
+    .container, p {
+      margin: 1rem;
+      padding-left: 1rem;
+    }
+  </style>
+{% endblock %}
 
-  <body>
-
+{% block body %}
+  <div class="container">
     <h1>Lista książek:</h1>
     <ul>
       {% for book in books %}
@@ -30,7 +33,6 @@
       {% endfor %}
     </ol>
     <p>Chwilowy brak nakładu</p>
+  </div>
     
-  </body>
-
-</html>
+{% endblock %}
