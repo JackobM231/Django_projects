@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     
     # Django applications installed from external modules
     'django_extensions',
+    'import_export',
     
     # My applications
     'books.apps.BooksConfig',

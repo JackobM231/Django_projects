@@ -14,6 +14,11 @@ class Book(models.Model):
   # autor książki
   created = models.DateTimeField(auto_now_add=True)
   # data utworzenia - tylko przy utworzeniu
+  
+  tags = models.ManyToManyField("tags.Tag", related_name="books")
+  # Dodanie do książek tagów w relacji M2M oraz umożliwienia wyszukiwania książek po tagu dzięki related_name
+  
+  
   def __str__(self):
     # metoda specjalna służąca do przygotowania reprezentacji
     # tekstowej naszego obiektu. Zmiana w widoku jak i w PA
