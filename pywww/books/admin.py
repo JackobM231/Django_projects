@@ -2,7 +2,7 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from .models import Book
+from .models import Book, Author
 
 # Register your models here.
 class BookResource(resources.ModelResource):
@@ -12,7 +12,7 @@ class BookResource(resources.ModelResource):
 
 @admin.register(Book)
 class BookAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-  list_display = ['id', 'title', 'author', 'publication_year', 'created']
+  list_display = ['id', 'title', 'publication_year', 'created']
   search_fields = ['title', 'author', 'description']
   list_filter = ['available']
   resource_class = BookResource
@@ -21,3 +21,7 @@ class BookAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 # admin.site.register(Book, BookAdmin)
 # # rejestracja modeli w panelu administracyjnym (sprawienie że są widoczne)
 # zamiast tego mamy już @admin.register(Book)
+
+@admin.register(Author)
+class AuthorAdmin(admin.ModelAdmin):
+  pass
