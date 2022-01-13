@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block style %}<link href={% static "posts/css/style.css" %} rel="stylesheet">{% endblock %}
+
+{% block title %}Dodaj post{% endblock %}
+
+{% block body %}
+
+  <h2>Dodaj post:</h2>
+  <div class="about">
+    <form method="POST" class='row justify-content-md-center'>
+      {% csrf_token %}
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="p_title">Tytuł posta:</label>
+          <input type="text" id="p_title" name="title" class="form-control" maxlength="255" placeholder="Wprowadź tytuł" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="p_content">Tytuł posta:</label>
+          <textarea type="text" id="p_content" name="content" class="form-control" placeholder="Wprowadź treść" rows='3' required></textarea>
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label" for="p_published">
+            Post publiczny
+          </label>
+          <input class="form-check-input" type="checkbox" id="p_published">
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label" for="p_sponsored">
+            Post sponsorowany
+          </label>
+          <input class="form-check-input" type="checkbox" id="p_sponsored">
+        </div>
+  
+        <div class="form-group row">
+          <label for="p_file">Dołącz plik: </label>
+          <input type="file" class="form-control-file" name="file" id="p_file">
+        </div>
+    
+        <div class="form-group row">
+          <label for="p_image">Dołącz obraz: </label>
+          <input type="file" class="form-control-file" accept="image/*" name="image" id="p_image">
+        </div>
+    
+        <!-- <button type="submit" class="btn btn-primary">Dodaj</button> -->
+        <input type="submit" value="Dodaj" class="btn btn-primary">
+      </div>
+    </form>
+  </div>
+  
+{% endblock %}

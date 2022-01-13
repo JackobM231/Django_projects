@@ -29,3 +29,7 @@ def post_details(request, post_id):
   context = {"post": post}
   return render(request, "posts/details.html", context)
 
+
+def add_post(request):
+  return render(request, "posts/add.html")
+
