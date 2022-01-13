@@ -8,8 +8,9 @@ from posts.models import Post
 
 # Create your views here.
 def posts_list(request):
-  posts = Post.objects.all()
-  context = {'posts_list': posts, 'posts_number': len(posts), 'topics': ['fantasy', 3, True]}
+  published_posts = Post.objects.filter(published=True)
+  all_posts = Post.objects.count()
+  context = {'posts_list': published_posts, 'all_posts_number': all_posts, 'topics': ['fantasy', 3, True]}
   return render(request, "posts/list.html", context)
 
 # def post(request):

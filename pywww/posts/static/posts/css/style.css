@@ -1,7 +1,18 @@
-body {
-  background-color: rgb(194, 159, 136);
-}
+/* body {
+  background-color: rgb(208, 207, 218);
+} */
 
 ol>li:nth-child(even) {
-  background-color: rgb(152, 132, 184)
+  background-color: rgb(134, 184, 132)
+}
+
+.posts__img {
+  width: 100%;
+  max-width: 100px;
+  display: block;
+  margin: 1rem auto;
+}
+
+.row {
+  background-color: rgba(255, 68, 0, 0.329);
 }

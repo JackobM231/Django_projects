@@ -1,16 +1,42 @@
 {% extends 'base.html' %}
 
+{% load static %}
+{% block style %}<link href={% static "posts/css/style.css" %} rel="stylesheet">{% endblock %}
+
 {% block title %}Szczegóły posta{% endblock %}
 
 {% block body %}
 
-  <h2>{{ post.title }}</h2>
-  <div>
-    <small>Utworzono: {{ post.created }}, zmodyfikowano: {{ post.modified }}</small>
+  <!-- Wyświetlanie wyłącznie opublicznionych postów -->
+  <div class="row">
+    {% if post.published %}
+
+      <div class="col-md-9">
+        <h2>{{ post.title }}</h2>
+        <div>
+          <small>Utworzono: {{ post.created }}, zmodyfikowano: {{ post.modified }}</small>
+        </div>
+        <div>
+          <p>{{ post.content }}</p>
+        </div>
+        {% if post.example_file %}
+        <div>
+          <p>Pobierz <a href="{{ post.example_file.url }}">plik</a></p>
+        </div>
+        {% endif %}
+      </div>
+
+      {% if post.image %}
+        <div class="col-md-3">
+          <img class="posts__img" src="{{ post.image.url }}">
+        </div>
+      {% endif %}
+    
+    {% else %}
+      <h2>Post nie nie jest publiczny</h2>
+    {% endif %}
   </div>
-  <div>
-    <p>{{ post.content }}</p>
-  </div>
+  
   <a href="{% url 'posts:list' %}">Lista postów</a>
 
 {% endblock %}

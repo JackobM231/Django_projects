@@ -116,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 
@@ -142,3 +142,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # https://django-extensions.readthedocs.io/en/latest/shell_plus.html
 
 SHELL_PLUS_PRINT_SQL = True
+
+# Miejsce uploadowania naszych plików
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Miejsce gdzie trzymamy pliki do których prowadzą adresy z BD
+MEDIA_URL = '/media/'

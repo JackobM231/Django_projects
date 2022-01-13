@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
 
 {% load static %}
-{% block style %}<link rel="stylesheet" href={% static "posts/css/style.css" %}>{% endblock %}
+{% block style %}<link href={% static "posts/css/style.css" %} rel="stylesheet">{% endblock %}
 
 {% block title %}Lista postów{% endblock %}
 
 {% block body %}
 
-  <h2>Lista postów:</h2>
+  <h2>Lista opublikowanych postów:</h2>
   <ol>
     {% for post in posts_list %}
-      <li>
-        <a href ="{% url 'posts:post_details' post.id %}" target="_blank">{{post.title}}</a> 
-        {% if post.sponsored %}
-          (sponsorowany)
-        {% endif %}
-      </li>
+        <li>
+          <a href ="{% url 'posts:post_details' post.id %}" target="_blank">{{post.title}}</a> 
+          {% if post.sponsored %}
+            (sponsorowany)
+          {% endif %}
+        </li>
     {% endfor %}
   </ol>
 
-  <p>Liczba postów: {{posts_number}}</p>
+  <p>Całkowita liczba postów: {{all_posts_number}}</p>
   
   <p>Lista:</p>
   {% for topic in topics %}
