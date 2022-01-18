@@ -1,3 +1,7 @@
 Django==3.2.9
 django-extensions==3.1.5
 Faker==9.9.0
+django-import-export
+PyYAML==6.0
+pillow
+django-crispy-forms

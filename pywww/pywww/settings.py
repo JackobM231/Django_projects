@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Django applications installed from external modules
     'django_extensions',
     'import_export',
+    'crispy_forms',
     
     # My applications
     'books.apps.BooksConfig',
@@ -148,3 +149,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Miejsce gdzie trzymamy pliki do których prowadzą adresy z BD
 MEDIA_URL = '/media/'
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
