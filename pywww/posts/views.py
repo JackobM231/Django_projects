@@ -1,10 +1,12 @@
 # from django.shortcuts import render -deleted
-from django.http import HttpResponse
 # from django.template import loader
 # # Imported loader let us use get_template method (replaced with render method)
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 
 from posts.models import Post
+from posts.forms import PostForm
 
 # Create your views here.
 def posts_list(request):
@@ -13,16 +15,6 @@ def posts_list(request):
   context = {'posts_list': published_posts, 'all_posts_number': all_posts, 'topics': ['fantasy', 3, True]}
   return render(request, "posts/list.html", context)
 
-# def post(request):
-#   post = Post.objects.first()
-#   html = f"<h2>{post.title}</h2>"
-#   html += f'''<div>
-#                 <small>Utworzono: {post.created}, zmodyfikowano: {post.modified}</small>
-#               </div>
-#               <div>
-#                 <p>{post.content}.</p>
-#               </div>'''
-#   return HttpResponse(html)
 
 def post_details(request, post_id):
   post = Post.objects.get(id=post_id)
@@ -32,4 +24,17 @@ def post_details(request, post_id):
 
 def add_post(request):
   return render(request, "posts/add.html")
+
+
+def add_post_form(request):
+  if request.method == "POST" and request.user.is_authenticated:
+    form = PostForm(data=request.POST)
+    if form.is_valid():
+      form.cleaned_data['author'] = request.user
+      post = Post.objects.create(**form.cleaned_data)
+      return HttpResponseRedirect(reverse('posts:add'))
+  else:
+    form = PostForm()
+    
+  return render(request, 'posts/add.html', {'form': form})
 

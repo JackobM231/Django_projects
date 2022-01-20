@@ -5,7 +5,7 @@ from django import forms
 
 
 class ContactForm(forms.Form):
-  '''Add new post form'''
+  '''Contact form'''
   email = forms.EmailField(label="Adres email")
   title = forms.CharField(label="Tytuł", max_length=255)
   content = forms.CharField(label="Treść", widget=forms.Textarea)
@@ -16,7 +16,6 @@ class ContactForm(forms.Form):
     self.helper = FormHelper()
     self.helper.form_method = 'post'
     self.helper.form_action = 'contact'
-    self.helper.add_input(Submit('submit', 'Wyślij'))
     self.helper.layout = Layout(
       Fieldset(
         'Dane kontaktowe',
@@ -29,11 +28,11 @@ class ContactForm(forms.Form):
       ),
       Fieldset(
         'Dodatkowe',
-        HTML('Zaznacz jeśli otrzymać kopię wiadomość na email'),
+        HTML('Zaznacz jeśli chcesz otrzymać kopię wiadomość mailem'),
         'send_to_me',
       ),
       ButtonHolder(
         Submit('submit', 'Wyślij', css_class='btn btn-primary'),
-        css_class='d-flex justify-content-end'
+        css_class='d-flex justify-content-start'
       )
     )

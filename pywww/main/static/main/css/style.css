@@ -6,3 +6,7 @@ body {
   height: 30px;
   width: auto;
 }
+
+fieldset {
+  margin-bottom: 1rem;
+}

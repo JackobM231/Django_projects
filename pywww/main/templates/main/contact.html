@@ -3,8 +3,10 @@
 
 {% block title %}Kontakt{% endblock %}
 
-{% block content %}
-{% crispy form form.helper %}
+{% block body %}
+
+<div class="d-flex justify-content-center">
+  {% crispy form form.helper %}
+</div>
+
 {% endblock %}
-
-
