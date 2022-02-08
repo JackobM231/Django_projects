@@ -4,13 +4,13 @@ from common.models import Timestamp
 # Create your models here.
 
 class Post(Timestamp):
-  title = models.CharField(max_length=255)
+  title = models.CharField(verbose_name='Tytuł', max_length=255)
   # pole tekstowe o określonej długości
-  content = models.TextField()
+  content = models.TextField(verbose_name='Treść')
   # pole tekstowe o nieokreślonej długości
-  published = models.BooleanField(default=False)
+  published = models.BooleanField(verbose_name='Opublikowany', default=False)
   # flaga true/false
-  sponsored = models.BooleanField(default=False)
+  sponsored = models.BooleanField(verbose_name='Sponsorowany', default=False)
   # post sponsorowany
   author = models.ForeignKey("auth.User", on_delete=models.CASCADE, related_name="posts")
   # relacja postu z autorem którym jest id usera
@@ -20,8 +20,8 @@ class Post(Timestamp):
   # relacja wiele do wielu postu z kategoriami (w przyszłości użyć nazwy mnogiej)
   example_file = models.FileField(upload_to='posts/examples/', blank=True, null=True)
   # możliwość dodania ścieżki pliku, który później będziemy mogli pobrać
-  image = models.ImageField(upload_to='posts/images/%Y/%m/%d', blank=False, null=True)
-  # możliwość dodania obrazu do pliku, blik jest wymagany w formularzu (blank=false), ale nie jest wymagany w BD (null=False)
+  image = models.ImageField(upload_to='posts/images/%Y/%m/%d', blank=True, null=True)
+  # możliwość dodania obrazu do pliku, blik nie jest wymagany w formularzu (blank=True), ale nie jest wymagany w BD (null=False)
   
   def __str__(self):
     # metoda specjalna służąca do przygotowania reprezentacji
@@ -42,3 +42,4 @@ class Category(models.Model):
   
   class Meta:
     verbose_name_plural = "categories"
+    
