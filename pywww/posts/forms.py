@@ -1,4 +1,5 @@
 from django import forms
+from dal import autocomplete
 
 from posts.models import Post
 from tags.models import Tag
@@ -42,11 +43,12 @@ from django.contrib.admin.widgets import AutocompleteSelectMultiple
 
 class PostForm(forms.ModelForm):
   tags = forms.ModelMultipleChoiceField(
-    queryset=Tag.objects.all(),
-    widget=AutocompleteSelectMultiple(
-      Post._meta.get_field('tags'),
-      admin.AdminSite(),
-    )
+        queryset=Tag.objects.all(),
+        widget = autocomplete.ModelSelect2Multiple(url='tags:tag-autocomplete') 
+        # widget=AutocompleteSelectMultiple(
+        #       Post._meta.get_field('tags'),
+        #       admin.AdminSite(),
+        # ) Do wyszukiwania bez DAL
   )
   
   class Meta:
