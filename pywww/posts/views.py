@@ -46,6 +46,8 @@ def add_post_form(request):
       instance = form.save(commit=False)
       instance.author = request.user
       instance.save()
+      form.save_m2m()
+      # Zapis relacji ManyToMany
       return HttpResponseRedirect(reverse('posts:add'))
   else:
     form = PostForm()

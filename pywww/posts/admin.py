@@ -19,6 +19,10 @@ class PostAdmin(ExportMixin, admin.ModelAdmin): # Wygląd i zachowanie w PA
   # Panel do szukanie elementów
   list_filter = ['published', 'sponsored']
   # Możliwość ustawienia filtrów na pasku po lewej
+  autocomplete_fields = ['tags']
+  # Autouzupełnianie wpisywanych tagów (alternatywa dla filter_horizontal)
+  # filter_horizontal = ['tags']
+  # Umożliwia alternatywne wyświetlanie i dodawanie tagów do postó w PA
   resource_class = PostResource
   # Umożliwienie skorzystania z eksportu w PA dzięki klasie PostResource
 

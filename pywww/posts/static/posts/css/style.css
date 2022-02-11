@@ -17,3 +17,11 @@ ol>li:nth-child(even) {
 .form-group {
   margin-bottom: 1rem;
 }
+
+li:nth-child(odd) {
+  width: 100%;
+}
+
+.select2-selection__rendered {
+  border: 2px dashed rgb(99, 99, 99);
+}

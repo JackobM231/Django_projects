@@ -7,3 +7,5 @@ from .models import Tag
 class TagAdmin(admin.ModelAdmin):
   prepopulated_fields = {"slug": ("name",)}
   # Dzięki temu można dodwać tagi w PA podając wyłącznie nazwę, a slug jest tworzony na jego podstawie
+  search_fields = ['name']
+  # Kolumna po której szukamy

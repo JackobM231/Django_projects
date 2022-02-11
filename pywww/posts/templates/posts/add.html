@@ -2,6 +2,9 @@
 
 {% load crispy_forms_tags %}
 
+{% load static %}
+{% block style %}<link href={% static "posts/css/style.css" %} rel="stylesheet">{% endblock %}
+
 {% block title %}New post{% endblock %}
 
 {% block body %}

@@ -1,7 +1,13 @@
+from django import forms
+
+from posts.models import Post
+from tags.models import Tag
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, ButtonHolder, Div
-from django import forms
-from posts.models import Post
+
+from django.contrib import admin
+from django.contrib.admin.widgets import AutocompleteSelectMultiple
 
 
 # class PostForm(forms.Form):
@@ -35,15 +41,24 @@ from posts.models import Post
 #     )
 
 class PostForm(forms.ModelForm):
+  tags = forms.ModelMultipleChoiceField(
+    queryset=Tag.objects.all(),
+    widget=AutocompleteSelectMultiple(
+      Post._meta.get_field('tags'),
+      admin.AdminSite(),
+    )
+  )
+  
   class Meta:
     model = Post
-    fields = ('title', 'content', 'published', 'sponsored', 'image')
+    fields = ['title', 'content', 'published', 'sponsored', 'image', 'tags']
     labels = {
       'title': 'Tytuł',
       'content': 'Treść',
       'published': 'Opublikowany',
       'sponsored': 'Sponsorowany',
-      'iamge': 'Obraz'
+      'iamge': 'Obraz',
+      'tags' : 'Tagi',
     }
     
   def __init__(self, *args, **kwargs):
@@ -56,12 +71,13 @@ class PostForm(forms.ModelForm):
         'Dodaj post',
         'title',
         'content',
+        'tags',
         'image',
         'published', 
-        'sponsored'
+        'sponsored',
       ),
       ButtonHolder(
-        Submit('submit', 'Dodaj', css_class='btn btn-primary'),
+        Submit('submit', 'Zapisz', css_class='btn btn-primary'),
         css_class='d-flex justify-content-center'
       )
     )
