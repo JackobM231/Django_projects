@@ -1,0 +1,17 @@
+{% extends "books/layout.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Add book to library{% endblock %}
+
+{% block style %}
+  <style>
+    .form-control {
+      background-color: rgb(240, 239, 226);
+    }
+  </style>  
+{% endblock %}
+
+{% block body %}
+  {% crispy form %}
+{% endblock %}

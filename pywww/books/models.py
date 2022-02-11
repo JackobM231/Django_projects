@@ -23,20 +23,27 @@ class Book(Timestamp):
   # opis książki z ograniczeniem znaków
   available = models.BooleanField(default=True)
   # flaga true/false
-  publication_year = models.SmallIntegerField(help_text="Please use this format 'yyyy'", blank=True, null=True)
+  publication_year = models.SmallIntegerField(help_text="Please use this format 'YYYY'", blank=True, null=True)
   # rok publikacji, może być pusty
-  author = models.ManyToManyField(Author, related_name="books")
+  authors = models.ManyToManyField(Author, related_name="books")
   # autor książki - możliwe wielu autorów
-  
-  tags = models.ManyToManyField("tags.Tag", related_name="books")
+  tags = models.ManyToManyField("tags.Tag", blank=True, related_name="books")
   # Dodanie do książek tagów w relacji M2M oraz umożliwienia wyszukiwania książek po tagu dzięki related_name
-  
+  image = models.ImageField(upload_to='books/covers/%Y/%m/%d', blank=True, null=True)
+  # możliwość dodania obrazu do pliku, plik nie jest wymagany w formularzu (blank=True) oraz nie jest wymagany w BD (null=False)
   
   def __str__(self):
     # metoda specjalna służąca do przygotowania reprezentacji
     # tekstowej naszego obiektu. Zmiana w widoku jak i w PA
     return f"{self.id}. {self.title}"
   
+  
+class Borrow(models.Model):
+  book = models.ForeignKey('Book', on_delete=models.CASCADE, related_name='borrows')
+  #related_name Nazwa używana do relacji z powiązanego obiektu do tego (z Book do Borrow)
+  user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='borrows')
+  borrow_date = models.DateTimeField(auto_now_add=True)
+  return_date = models.DateTimeField(blank=True, null=True)
   
 
   

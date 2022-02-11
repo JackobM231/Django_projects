@@ -37,12 +37,13 @@ from posts.models import Post
 class PostForm(forms.ModelForm):
   class Meta:
     model = Post
-    fields = ('title', 'content', 'published', 'sponsored')
+    fields = ('title', 'content', 'published', 'sponsored', 'image')
     labels = {
       'title': 'Tytuł',
       'content': 'Treść',
       'published': 'Opublikowany',
-      'sponsored': 'Sponsorowany'
+      'sponsored': 'Sponsorowany',
+      'iamge': 'Obraz'
     }
     
   def __init__(self, *args, **kwargs):
@@ -55,6 +56,7 @@ class PostForm(forms.ModelForm):
         'Dodaj post',
         'title',
         'content',
+        'image',
         'published', 
         'sponsored'
       ),

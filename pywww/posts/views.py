@@ -41,7 +41,7 @@ def add_post(request):
 
 def add_post_form(request):
   if request.method == "POST" and request.user.is_authenticated:
-    form = PostForm(request.POST)
+    form = PostForm(request.POST, request.FILES)
     if form.is_valid():
       instance = form.save(commit=False)
       instance.author = request.user
@@ -56,11 +56,10 @@ def add_post_form(request):
 def edit_post(request, post_id):
   post = get_object_or_404(Post, id=post_id)
   if request.method == "POST":
-    form = PostForm(request.POST, instance=post)
+    form = PostForm(request.POST, request.FILES, instance=post)
     if form.is_valid():
       form.save()
       return HttpResponseRedirect(reverse('posts:post_details', args=[post_id]))
-     
   else:
     form = PostForm(instance=post)
 

@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: space-between;
 
-  background-color: rgba(124, 91, 19, .3);
+  background-color: rgb(189, 184, 173);
   padding: 0.5rem;
 }
     .header__nav {
@@ -33,3 +33,7 @@
         .header__title-img {
           height: 5rem;
         }
+
+body {
+  background-color: #d7aa65;
+}

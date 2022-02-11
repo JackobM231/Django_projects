@@ -1,4 +1,5 @@
 {% extends "books/layout.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %}Book's details{% endblock %}
 
@@ -15,21 +16,45 @@
     .book__details--detail {
       padding: 0.5rem;
     }
+
+    .book__header {
+      display: flex;
+      align-items: center;
+    }
+
+    .book__header--img {
+      width: 100px;
+      height: auto;
+      margin-left: 4rem;
+    }
   </style>
 {% endblock %}
 
 
 {% block body %}
   <div class="container">
-    <h1 class="book__title">
-      {{book.id}}.
-      {{book.title}}
-    </h1>
+    <div class="book__header">
+      <h1 class="book__header--title">
+        {{ book.id }}.
+        {{ book.title }}
+      </h1>
+      {% if book.image %}
+        <img class="book__header--img" src="{{ book.image.url }}" alt="cover">
+      {% endif %}
+    </div>
     <h2 class="book__details">Details:</h2>
     <ul class="book__details">
-      <li class="book__details--detail">Author: <br>{{book.author}}</li>
-      <li class="book__details--detail">Publication Year: <br>{{book.publication_year}}</li>
-      <li class="book__details--detail">Description: <br>{{book.description}}</li>
+      <li class="book__details--detail">Author: <br>
+        {% for author in book.authors.all %}
+          {% if forloop.last %}
+            {{ author.name }}
+          {% else %}
+            {{ author.name }}, 
+          {% endif %}
+        {% endfor %}
+      </li>
+      <li class="book__details--detail">Publication Year: <br>{{ book.publication_year }}</li>
+      <li class="book__details--detail">Description: <br>{{ book.description }}</li>
       <li class="book__details--detail">Availability: <br>
         {% if book.available == True %}
           Available
@@ -38,5 +63,12 @@
         {% endif %}
       </li>
     </ul>
+    {% if user.is_authenticated %}
+      {% if book.available == True %}
+        {% crispy form %}
+      {% endif %}
+      <br>
+      <p><a href="{% url 'books:edit' book_id=book.id %}">Edit this book</a></p>
+    {% endif %}
   </div>
 {% endblock %}
