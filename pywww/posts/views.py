@@ -4,6 +4,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.core.paginator import Paginator
 
 from posts.models import Post
 from posts.forms import PostForm
@@ -66,3 +67,13 @@ def edit_post(request, post_id):
     form = PostForm(instance=post)
 
   return render(request, 'posts/add.html', {'form': form})
+
+
+def listing(request):
+  # Paginacja
+  content_list = Post.objects.all()
+  paginator = Paginator(content_list, 10)
+  
+  page_num = request.GET.get('page')
+  page_obj = paginator.get_page(page_num)
+  return render(request, 'posts/pag_list.html', {'page_obj': page_obj})

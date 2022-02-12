@@ -1,10 +1,27 @@
+from django import forms
+
+from books.models import Book
+from tags.models import Tag
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, ButtonHolder
-from django import forms
-from books.models import Book
+
+from django.contrib import admin
+from django.contrib.admin.widgets import AutocompleteSelectMultiple
+from dal import autocomplete
 
 
 class BookForm(forms.ModelForm):
+  tags = forms.ModelMultipleChoiceField(
+    # Możliwość wyszukiwania tagów i przypisywania ich poza PA
+        queryset=Tag.objects.all(),
+        # widget=AutocompleteSelectMultiple(
+        #   Book._meta.get_field('tags'),
+        #   admin.AdminSite()
+        # ) Do wyszukiwania tagów bez korzystania z DAL
+        widget=autocomplete.ModelSelect2Multiple(url='tags:tag-autocomplete'),
+  )
+  
   class Meta:
     model = Book
     fields = ('title',

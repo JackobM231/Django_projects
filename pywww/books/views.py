@@ -38,6 +38,8 @@ def add_book_form(request):
     form = BookForm(request.POST, request.FILES)
     if form.is_valid():
       form.save()
+      form.save_m2m()
+      # Zapis elementów powiązanych m2m z book
       return HttpResponseRedirect(reverse('books:add'))
   else:
     form = BookForm()

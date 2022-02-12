@@ -15,6 +15,8 @@ class BookAdmin(ImportExportModelAdmin, admin.ModelAdmin):
   list_display = ['id', 'title', 'publication_year', 'created']
   search_fields = ['title', 'author', 'description']
   list_filter = ['available']
+  autocomplete_fields = ['tags']
+  # Automatyczne uzupełnianie tagów
   resource_class = BookResource
   # umożliwienie eksportu
 
