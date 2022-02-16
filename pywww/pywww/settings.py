@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'books.apps.BooksConfig',
     'main.apps.MainConfig',
     'posts.apps.PostsConfig',
+    'register.apps.RegisterConfig',
     'tags.apps.TagsConfig',
 ]
 
@@ -68,7 +69,7 @@ ROOT_URLCONF = 'pywww.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pl-PL'
 
 TIME_ZONE = 'Europe/Warsaw'
 
@@ -154,3 +155,7 @@ MEDIA_URL = '/media/'
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# URL do którego przekieruje nas django po zalogowaniu i wylogowaniu
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
