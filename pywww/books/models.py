@@ -1,6 +1,7 @@
 from django.db import models
 from common.models import Timestamp
 
+from sorl.thumbnail import ImageField
 
 # Create your models here.
 class Author(Timestamp):
@@ -29,7 +30,7 @@ class Book(Timestamp):
   # autor książki - możliwe wielu autorów
   tags = models.ManyToManyField("tags.Tag", blank=True, related_name="books")
   # Dodanie do książek tagów w relacji M2M oraz umożliwienia wyszukiwania książek po tagu dzięki related_name
-  image = models.ImageField(upload_to='books/covers/%Y/%m/%d', blank=True, null=True)
+  image = ImageField(upload_to='books/covers/%Y/%m/%d', blank=True, null=True)
   # możliwość dodania obrazu do pliku, plik nie jest wymagany w formularzu (blank=True) oraz nie jest wymagany w BD (null=False)
   
   def __str__(self):

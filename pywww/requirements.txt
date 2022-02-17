@@ -6,3 +6,8 @@ PyYAML==6.0
 pillow
 django-crispy-forms~=1.13.0
 django-autocomplete-light
+sorl-thumbnail
+python-memcached
+
+# dev
+ipython

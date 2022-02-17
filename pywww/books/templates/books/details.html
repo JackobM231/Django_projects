@@ -1,5 +1,7 @@
 {% extends "books/layout.html" %}
+
 {% load crispy_forms_tags %}
+{% load thumbnail %}
 
 {% block title %}Book's details{% endblock %}
 
@@ -39,7 +41,10 @@
         {{ book.title }}
       </h1>
       {% if book.image %}
-        <img class="book__header--img" src="{{ book.image.url }}" alt="cover">
+        {% thumbnail book.image "200x290" as im %} <!-- zmiana rozdzielczości (miniaturki) -->
+          <img class="book__header--img" src="{{ im.url }}">
+        {% endthumbnail %}
+        <!-- <img class="book__header--img" src="{{ book.image.url }}" alt="cover"> -->
       {% endif %}
     </div>
     <h2 class="book__details">Details:</h2>

@@ -1,6 +1,8 @@
 from django.db import models
 from common.models import Timestamp
 
+from sorl.thumbnail import ImageField
+
 # Create your models here.
 
 class Post(Timestamp):
@@ -20,7 +22,7 @@ class Post(Timestamp):
   # relacja wiele do wielu postu z kategoriami (w przyszłości użyć nazwy mnogiej)
   example_file = models.FileField(upload_to='posts/examples/', blank=True, null=True)
   # możliwość dodania ścieżki pliku, który później będziemy mogli pobrać
-  image = models.ImageField(upload_to='posts/images/%Y/%m/%d', blank=True, null=True)
+  image = ImageField(upload_to='posts/images/%Y/%m/%d', blank=True, null=True)
   # możliwość dodania obrazu do pliku, plik nie jest wymagany w formularzu (blank=True) oraz nie jest wymagany w BD (null=False)
   
   def __str__(self):

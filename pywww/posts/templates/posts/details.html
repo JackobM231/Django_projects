@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load thumbnail %}
+
 {% block style %}<link href={% static "posts/css/style.css" %} rel="stylesheet">{% endblock %}
 
 {% block title %}Szczegóły posta{% endblock %}
@@ -28,7 +30,10 @@
 
       {% if post.image %}
         <div class="col-md-3">
-          <img class="posts__img" src="{{ post.image.url }}">
+          {% thumbnail post.image "x150" format="PNG" as im %}<!-- height 150 -->
+            <img class="posts__img" src="{{ im.url }}">
+          {% endthumbnail %}
+          <!-- <img class="posts__img" src="{{ post.image.url }}"> -->
         </div>
       {% endif %}
     

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'import_export',
     'crispy_forms',
+    'sorl.thumbnail',
     
     # My applications
     'books.apps.BooksConfig',
