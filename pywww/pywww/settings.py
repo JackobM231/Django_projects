@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     
     # My applications
     'books.apps.BooksConfig',
+    'galleries.apps.GalleriesConfig',
     'main.apps.MainConfig',
     'posts.apps.PostsConfig',
     'register.apps.RegisterConfig',
