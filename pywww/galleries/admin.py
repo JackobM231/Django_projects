@@ -7,7 +7,7 @@ from .models import Gallery, Photo
 # class PhotoInline(admin.TabularInline): alternatywny wygląd
 class PhotoInline(admin.StackedInline):
   model = Photo
-  fields = ['title', 'slug', 'short_description', 'image', 'created', 'modified']
+  fields = ['title', 'slug', 'short_description', 'image', 'status', 'created', 'modified']
   # Pola które będą widoczne w trakcie dodawania nowych zdjęć
   readonly_fields = ['slug', 'created', 'modified']
   # Pola do odczytu po reszcie pól
@@ -20,7 +20,7 @@ class PhotoInline(admin.StackedInline):
 
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
-  fields = ['title', 'slug', 'description', 'created', 'modified']
+  fields = ['title', 'slug', 'description', 'status', 'created', 'modified']
   readonly_fields = ['slug', 'created', 'modified']
   inlines = [PhotoInline]
   # Zapewnia wyświetlanie zdjęć należących do tej galerii w PA

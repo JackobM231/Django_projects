@@ -10,3 +10,19 @@ body {
 fieldset {
   margin-bottom: 1rem;
 }
+
+.mg-sm-bott {margin-bottom: 1rem;}
+.mg-md-bott {margin-bottom: 2rem;}
+.mg-lg-bott {margin-bottom: 4rem;}
+
+.mg-sm-top {margin-top: 1rem;}
+.mg-md-top {margin-top: 2rem;}
+.mg-lg-top {margin-top: 4rem;}
+
+.mg-sm-left {margin-left: 1rem;}
+.mg-md-left {margin-left: 2rem;}
+.mg-lg-left {margin-left: 4rem;}
+
+.mg-sm-right {margin-right: 1rem;}
+.mg-md-right {margin-right: 2rem;}
+.mg-lg-right {margin-right: 4rem;}

@@ -16,7 +16,10 @@ from sorl.thumbnail import ImageField
 class Gallery(Timestamp, SlugMixin):
   title = models.CharField(max_length=100)
   description = models.TextField(max_length=1500, blank=True, null=True)
-  # slug = models.SlugField(unique=True, max_length=150)
+  status = models.CharField(max_length=50,
+                            choices=[('HIDE', 'hide'), ('PUBLISHED', 'published'), ('NEW', 'new')],
+                            default= 'NEW')
+  # slug = models.SlugField(unique=True, max_length=150) [hide = 'hide', 'published', 'new']
   
   def __str__(self):
     return self.title
@@ -46,6 +49,9 @@ class Photo(Timestamp, SlugMixin):
   image = ImageField(upload_to=upload_to)
   gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE, related_name='photos')
   source = models.CharField(max_length=512, blank=True, null=True)
+  status = models.CharField(max_length=50,
+                            choices=[('HIDE', 'hide'), ('PUBLISHED', 'published'), ('NEW', 'new')],
+                            default= 'NEW')
   
   def __str__(self):
     return self.title 

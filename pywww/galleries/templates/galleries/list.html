@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Galerie{% endblock %}
+
+{% block body %}
+
+  <h2>Lista opublikowanych galerii:</h2>
+  <ol>
+    {% for gallery in pub_gall_with_photos %}
+        <li>
+          <a href ='{{gallery.slug}}' target="_blank">{{gallery.title}}</a> 
+        </li>
+    {% endfor %}
+  </ol>  
+  
+{% endblock %}

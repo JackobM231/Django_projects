@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}Galeria{% endblock %}
+
+{% block body %}
+
+  <h2 class="info mg-sm-bott mg-sm-top">{{ info }}</h2>
+
+  {% for photo in photos %}
+    <div class="row mg-md-bott mg-sm-left">
+      <div class="col-lg-4 col-sm-12" style="display:flex; justify-content: center">
+        <img
+          src="../media/{{ photo.image }}"
+          class="w-100 shadow-1-strong rounded"
+          style="max-width:300px"
+          alt="{{photo.title}}"
+        /> 
+      </div>
+      <div class="col-lg-8 col-sm-12">
+        <h3>{{photo.title|capfirst}}</h3>
+        <p>Opis:<br>
+          {% if photo.short_description %}
+            {{photo.short_description}}
+          {% else %}
+            Brak opisu
+          {% endif %}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+
+{% endblock %}
