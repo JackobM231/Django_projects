@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
     <a class="navbar-brand" href="{% url 'main:hello_world' %}">
       <img class="img--logo" src={% static "main/img/logo.png" %} alt="Logo">
     </a>
@@ -26,6 +26,7 @@
           <a class="nav-item nav-link" href="{% url 'main:hello_world' %}">Strona główna</a>
           <a class="nav-item nav-link" href="{% url 'posts:list' %}">Lista postów</a>
           <a class="nav-item nav-link" href="{% url 'books:list' %}">Lista książek</a>
+          <a class="nav-item nav-link" href="{% url 'galleries:galleries' %}">Galerie</a>
         </div>
         <div>
           {% if user.is_authenticated %}

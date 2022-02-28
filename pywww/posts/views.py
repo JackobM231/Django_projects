@@ -70,7 +70,6 @@ def edit_post(request, post_id):
 
 
 def listing(request):
-  
   posts = Post.objects.filter(published=True)
   q = request.GET.get('q')
   if q:

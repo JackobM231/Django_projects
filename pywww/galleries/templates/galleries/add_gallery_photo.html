@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+
+{% if user.is_authenticated %}
+  {% crispy form %}
+  {{ info }}
+
+{% else %}
+  <p class="mg-sm-top mg-sm-left">Zaloguj się by dodać nowe zdjęcia do galerii</p>
+
+{% endif %}
+
+{% endblock %}
