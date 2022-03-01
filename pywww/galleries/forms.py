@@ -13,6 +13,7 @@ class AddGalleryForm(forms.ModelForm):
   #     ('PUBLISHED', 'published'),
   #     ('HIDE', 'hide'),
   #   )
+  
   class Meta:
     model = Gallery
     fields = ['title', 'description', 'status']
@@ -61,7 +62,7 @@ class AddGalleryPhotoForm(forms.ModelForm):
     self.helper.form_method= 'POST'
     self.helper.layout = Layout(
       Fieldset(
-        'Dodaj nową galerię',
+        'Dodaj zdjęcie do galerii',
         'title',
         'short_description',
         'image',

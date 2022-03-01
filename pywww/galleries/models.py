@@ -13,13 +13,25 @@ from sorl.thumbnail import ImageField
 #   letters = string.ascii_letters
 #   return ''.join(random.choice(letters) for i in range(n))
 
+class Status(models.IntegerChoices):
+  NEW = 1, 'new'
+  HIDE = 2, 'hide'
+  PUBLISHED = 3, 'published'
+
 class Gallery(Timestamp, SlugMixin):
   title = models.CharField(max_length=100)
   description = models.TextField(max_length=1500, blank=True, null=True)
-  status = models.CharField(max_length=50,
-                            choices=[('HIDE', 'hide'), ('PUBLISHED', 'published'), ('NEW', 'new')],
-                            default= 'NEW')
+  status = models.PositiveSmallIntegerField(default=Status.NEW, choices= Status.choices)
   # slug = models.SlugField(unique=True, max_length=150) [hide = 'hide', 'published', 'new']
+  
+  def save(self, *args, **kwargs):
+    '''
+    Kiedy zapisujemy galerię ze statusem HIDE, 
+    zdjęcia które do niej przynależą również otrzymują status HIDE
+    '''
+    if self.status == Status.HIDE:
+      self.photos.update(status=Status.HIDE)
+    super().save(*args, **kwargs)
   
   def __str__(self):
     return self.title
@@ -36,8 +48,6 @@ class Gallery(Timestamp, SlugMixin):
   #           break
   #     self.slug = slug
   #   return super().save(*args, **kwargs)
-      
-
 
 def upload_to(instance, filename):
   return f'galleries/{instance.gallery.slug}/{filename}'
@@ -49,9 +59,7 @@ class Photo(Timestamp, SlugMixin):
   image = ImageField(upload_to=upload_to)
   gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE, related_name='photos')
   source = models.CharField(max_length=512, blank=True, null=True)
-  status = models.CharField(max_length=50,
-                            choices=[('HIDE', 'hide'), ('PUBLISHED', 'published'), ('NEW', 'new')],
-                            default= 'NEW')
+  status = models.PositiveSmallIntegerField(default=Status.NEW, choices=Status.choices)
   
   def __str__(self):
     return self.title 

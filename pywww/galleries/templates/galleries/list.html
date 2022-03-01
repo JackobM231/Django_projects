@@ -1,18 +1,38 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load thumbnail %}
 
 {% block title %}Galerie{% endblock %}
 
 {% block body %}
 
-  <h2>Lista opublikowanych galerii:</h2>
-  <ol>
-    {% for gallery in pub_gall_with_photos %}
-        <li>
-          <a href ='{{gallery.slug}}' >{{gallery.title}}</a> 
-        </li>
-    {% endfor %}
-  </ol>  
+  <div class="col-sm m-3">
+    <h2 class="info ">Lista opublikowanych galerii:</h2>
+  </div>
   
-{% endblock %}
+  <div class="row ms-4">
+    {% for gallery in pub_gall_with_photos %}
+    <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
+      <div class="card h-100">
+        {% thumbnail gallery.photos.first.image '150x150' crop='center' as im %}
+        <img src="{{ im.url }}" alt="{{ gallery.title }}" class="card-img-top">
+        {% endthumbnail %}
+        <div class="card-body">
+          <h4 class="card-title text-center">{{ gallery.title }}</h4>
+        </div>
+        <div class="card-footer text-center">
+          <a class='btn btn-primary' href='{{ gallery.slug }}'>Pokaż</a> 
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  
+  <div class="m-3">
+    <a href="{% url 'galleries:add_gallery' %}">
+      <span class="btn btn-secondary">Dodaj galerię</span>
+    </a>
+  </div>
+
+  {% endblock %}
