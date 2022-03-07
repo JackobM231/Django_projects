@@ -1,5 +1,6 @@
 from multiprocessing import context
 from django.shortcuts import render
+from django.db.models import Avg, Min, Max, Count
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -16,6 +17,12 @@ def galleries(request):
   # Zwraca QuerySet zawierający id wszystkich galerii ze zdjęciami
   pub_gall_with_photos = Gallery.objects.filter(status=Status.PUBLISHED, id__in=gall_id)
   # Do template zostaną przekazane jedynie galerie ze statusem published
+  '''
+  pub_gall = Gallery.objects.filter(status=Status.PUBLISHED)
+  # Galerie o statusie published
+  pub_gall_with_photos = pub_gall.annotate(photos_count=Count('photos')).filter(photos_count__gt=0)
+  # Galerie posiadające więcej niż jedno zdjęcie zastosownie annotacji
+  '''
   context = {'pub_gall_with_photos': pub_gall_with_photos}
   return render(request, 'galleries/list.html', context)
 

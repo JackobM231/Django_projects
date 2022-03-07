@@ -8,6 +8,8 @@ django-crispy-forms~=1.13.0
 django-autocomplete-light
 sorl-thumbnail
 python-memcached
+factory_boy
+faker_vehicle
 
 # dev
 ipython
