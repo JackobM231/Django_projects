@@ -10,14 +10,63 @@
     .form-control {
       background-color: rgb(240, 239, 226);
     }
+
+    .btn{
+      background-color: rgb(100, 181, 228);
+    }
+
+    .btn:hover{
+      background-color: rgb(76, 136, 172);;
+    }
   </style>  
 {% endblock %}
 
+
 {% block body %}
-  {% crispy form %}
+
+  {% if formset %}
+    <div class="col-md-6 offset-md-3">
+      <form id="form-container" action="." method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h4>Dodaj książkę</h4>
+        {{ form|crispy }}
+        <hr>
+        {{ formset.management_form }}
+        <h4>Dodaj autora książki</h4>
+        {% for form in formset %}
+          <div class="book-form mb-4">
+            {{ form|crispy }}
+            <hr>
+          </div>
+        {% endfor %}
+        <button id="add-form" type="button" class="btn btn-priamry">Dodaj kolejnego autora</button>
+        <hr>
+        <input type="submit" name="submit" value="Prześlij" class="btn">
+      </form>
+    </div>
+  {% endif %}
+
 {% endblock %}
+
 
 {% block script %}
   <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
-  {{ form.media }}
+  {{ form.media }} <!-- Do tagów -->
+  <script>
+    let form = document.querySelectorAll(".book-form")
+    const container = document.querySelector("#form-container")
+    const addButton = document.querySelector("#add-form")
+    const totalForms = document.querySelectorAll("#id_form-TOTAL_FORMS")
+    let formNum = form.length - 1
+    addButton.addEventListener("click", addForm)
+    function addForm(e) {
+      e.preventDefault()
+      let newForm = form[0].cloneNode(true)
+      let formRegex = RegExp(`form-(\\d){1}-`, 'g')
+      formNum++
+      newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`)
+      container.insertBefore(newForm, addButton)
+      totalForms.setAttribute('value', `${formNum + 1}`)
+    }
+  </script>
 {% endblock %}

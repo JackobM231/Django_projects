@@ -4,13 +4,47 @@
 
 {% block body %}
 
-{% if user.is_authenticated %}
-  {% crispy form %}
-  {{ info }}
-
-{% else %}
-  <p class="mg-sm-top mg-sm-left">Zaloguj się by dodać nowe zdjęcia do galerii</p>
-
+{% if formset %}
+  {% if user.is_authenticated %}
+    <div class="col-6 offset-md-3">
+      <form id="form-container" method="post" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- {{ info }} -->
+        {{ formset.management_form }}
+        {% for form in formset %}
+          <div class="photo-form mb-4">
+            {{ form|crispy }}
+            <hr>
+          </div>
+        {% endfor %}
+        <button id="add-form" type="'button" class="btn btn-primary">Dodaj jeszcze jeden</button>
+        <hr>
+        <input type="submit" name="submit" value="Prześlij" class="btn btn-primary">
+      </form>
+    </div>
+  {% else %}
+    <p class="mg-sm-top mg-sm-left">Zaloguj się by dodać nowe zdjęcia do galerii</p>
+  {% endif %}
 {% endif %}
 
+{% endblock %}
+
+{%block script %}
+  <script>
+    let form = document.querySelectorAll(".photo-form")
+    const container = document.querySelector("#form-container")
+    const addButton = document.querySelector("#add-form")
+    const totalForms = document.querySelectorAll("#id_form-TOTAL_FORMS")
+    let formNum = form.length - 1
+    addButton.addEventListener("click", addForm)
+    function addForm(e) {
+      e.preventDefault()
+      let newForm = form[0].cloneNode(true)
+      let formRegex = RegExp(`form-(\\d){1}-`, 'g')
+      formNum++
+      newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`)
+      container.insertBefore(newForm, addButton)
+      totalForms.setAttribute('value', `${formNum + 1}`)
+    }
+  </script>
 {% endblock %}

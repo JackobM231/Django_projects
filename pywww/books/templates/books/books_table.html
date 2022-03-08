@@ -67,7 +67,7 @@
         <tr class="table__row--marked">
             <td class="table__column--id">{{ book.id }}</td>
             <td class="table__column--title">
-              <a href="{{ book.id }}">{{ book.title }}</a>
+              <a href="{% url 'books:details' book.id %}">{{ book.title }}</a>
             </td>
             <td class="table__column--author">
               {% for author in book.authors.all %}

@@ -1,11 +1,12 @@
 # from django.shortcuts import render -deleted
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.forms import modelformset_factory
 from django.urls import reverse
 from django.utils import timezone
 
-from books.models import Book, Borrow
-from books.forms import BookForm, BookBorrowForm
+from books.models import Author, Book, Borrow
+from books.forms import AuthorForm, BookForm, BookBorrowForm
 
 
 # Create your views here.
@@ -34,17 +35,35 @@ def details(request, book_id):
 
 
 def add_book_form(request):
+  form = BookForm()
+  AuthorFormSet = modelformset_factory(Author, form=AuthorForm)
+  formset = AuthorFormSet(queryset=Author.objects.none())
   if request.method == 'POST' and request.user.is_authenticated:
     form = BookForm(request.POST, request.FILES)
+    formset = AuthorFormSet(request.POST)
     if form.is_valid():
-      form.save()
-      form.save_m2m()
-      # Zapis elementów powiązanych m2m z book
-      return HttpResponseRedirect(reverse('books:add'))
-  else:
-    form = BookForm()
-
-  return render(request, 'books/add_book.html', {'form': form})
+      instance = form.save()
+      if formset.is_valid():
+        for f in formset.cleaned_data:
+          if f:
+            author, _ = Author.objects.get_or_create(**f)
+            if author not in instance.authors.all():
+              # Coś tu nie trybi. I tak dodaje nowego identycznego autora
+              instance.authors.add(author)
+        instance.save()
+    return HttpResponseRedirect(reverse('books:add'))
+  return render(request,
+                'books/add_book.html',
+                {'form': form, 'formset': formset}
+              )
+    # form = BookForm(request.POST, request.FILES)
+    # if form.is_valid():
+    #   form.save()
+    #   form.save_m2m()
+    #   # Zapis elementów powiązanych m2m z book
+    #   return HttpResponseRedirect(reverse('books:add'))
+  #   form = BookForm()
+  # return render(request, 'books/add_book.html', {'form': form})
 
 
 def edit_book_form(request, book_id):

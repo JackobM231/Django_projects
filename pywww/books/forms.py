@@ -1,6 +1,7 @@
+from pyexpat import model
 from django import forms
 
-from books.models import Book
+from books.models import Book, Author
 from tags.models import Tag
 
 from crispy_forms.helper import FormHelper
@@ -11,6 +12,7 @@ from django.contrib.admin.widgets import AutocompleteSelectMultiple
 from dal import autocomplete
 
 
+'''
 class BookForm(forms.ModelForm):
   tags = forms.ModelMultipleChoiceField(
     # Możliwość wyszukiwania tagów i przypisywania ich poza PA
@@ -53,7 +55,7 @@ class BookForm(forms.ModelForm):
         css_class='d-flex justify-content-center'
       )
     )
-  
+'''  
   
 class BookBorrowForm(forms.Form):
   def __init__(self, *args, **kwargs):
@@ -61,3 +63,24 @@ class BookBorrowForm(forms.Form):
     self.helper = FormHelper()
     self.helper.form_method = 'post'
     self.helper.add_input(Submit('borrow', 'Wypożycz'))
+    
+    
+class AuthorForm(forms.ModelForm):
+  class Meta:
+    model = Author
+    fields = '__all__'
+    
+     
+class BookForm(forms.ModelForm):
+  
+  tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(),
+        widget=autocomplete.ModelSelect2Multiple(url='tags:tag-autocomplete')
+        )
+  authors = forms.ModelMultipleChoiceField(
+        queryset=Author.objects.all(),
+        required=False
+        )
+  class Meta:
+    model = Book
+    fields = '__all__'

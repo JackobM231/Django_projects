@@ -1,6 +1,7 @@
 from multiprocessing import context
 from django.shortcuts import render
 from django.db.models import Avg, Min, Max, Count
+from django.forms import modelformset_factory
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -70,14 +71,28 @@ def add_gallery(request):
 
 
 def add_gallery_photo(request, gallery_slug):
+  gallery = Gallery.objects.get(slug=gallery_slug)
+  PhotosFormSet = modelformset_factory(Photo, form=AddGalleryPhotoForm, extra=1)
+  # Tworzymy zbiór formularzy na podsatawie modelu Photo oraz formularzu AddGalleryPhotoForm (wyświetlanie jednego domyślnie)
+  formset = PhotosFormSet(queryset=gallery.photos.none())
+  # Formularze istniejących zdjęć nie będą zaliczane do formset
   if request.method == 'POST' and request.user.is_authenticated:
-    form = AddGalleryPhotoForm(request.POST, request.FILES)
-    if form.is_valid():
-      form.save()
-      info = 'Zdjęcie zostało dodane'
-      form = AddGalleryPhotoForm()
-      context = {'info': info, 'form': form}
-      return render(request, 'galleries/add_gallery_photo.html', context)
+    formset = PhotosFormSet(request.POST, request.FILES)
+    if formset.is_valid():
+      print(formset)
+      for f in formset.cleaned_data:
+        if f:
+          print(f)
+          Photo.objects.create(gallery=gallery, **f)
+    return HttpResponseRedirect(reverse('galleries:add_gallery_photo', args=[gallery_slug]))
+  # if request.method == 'POST' and request.user.is_authenticated:
+  #   form = AddGalleryPhotoForm(request.POST, request.FILES)
+  #   if form.is_valid():
+  #     form.save()
+  #     info = 'Zdjęcie zostało dodane'
+  #     form = AddGalleryPhotoForm()
+  #     context = {'info': info, 'form': form}
+  #     return render(request, 'galleries/add_gallery_photo.html', context)
   else:
-    form = AddGalleryPhotoForm()
-  return render(request, 'galleries/add_gallery_photo.html', {'form': form})
+    # form = AddGalleryPhotoForm()
+    return render(request, 'galleries/add_gallery_photo.html', {'formset': formset})

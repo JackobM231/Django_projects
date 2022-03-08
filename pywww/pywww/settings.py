@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -161,3 +160,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # URL do którego przekieruje nas django po zalogowaniu i wylogowaniu
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+# Dodawanie na końcu adresu url /
+APPEND_SLASH = True

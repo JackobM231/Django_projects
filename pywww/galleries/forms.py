@@ -41,17 +41,15 @@ class AddGalleryForm(forms.ModelForm):
     )
     
     
-    
 class AddGalleryPhotoForm(forms.ModelForm):
 
   class Meta:
     model = Photo
-    fields = ['title', 'short_description', 'image', 'gallery', 'source', 'status']
+    fields = ['title', 'short_description', 'image', 'source', 'status']
     labels = {
       'title': 'Tytuł',
       'short_description': 'Opis',
       'image': 'Zdjęcie/Obraz',
-      'gallery': 'Galeria',
       'source': 'Źródło',
       'status': 'Status'
     }
@@ -66,7 +64,6 @@ class AddGalleryPhotoForm(forms.ModelForm):
         'title',
         'short_description',
         'image',
-        'gallery',
         'source',
         'status'
       ),
