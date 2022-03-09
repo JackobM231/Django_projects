@@ -9,7 +9,7 @@ django-autocomplete-light
 sorl-thumbnail
 python-memcached
 factory_boy
-faker_vehicle
+django-tinymce
 
 # dev
 ipython

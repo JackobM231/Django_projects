@@ -6,6 +6,7 @@ from django.utils.text import slugify
 from common.models import Timestamp, SlugMixin
 
 from sorl.thumbnail import ImageField
+from tinymce import models as tinymce_models
 
 # Create your models here.
 
@@ -20,7 +21,8 @@ class Status(models.IntegerChoices):
 
 class Gallery(Timestamp, SlugMixin):
   title = models.CharField(max_length=100)
-  description = models.TextField(max_length=1500, blank=True, null=True)
+  # description = models.TextField(max_length=1500, blank=True, null=True)
+  description =tinymce_models.HTMLField(blank=True, null=True)
   status = models.PositiveSmallIntegerField(default=Status.NEW, choices= Status.choices)
   # slug = models.SlugField(unique=True, max_length=150) [hide = 'hide', 'published', 'new']
   

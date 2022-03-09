@@ -25,6 +25,7 @@ urlpatterns = [
     path('galleries/', include('galleries.urls')),
     path('posts/', include('posts.urls')),
     path('tags/', include('tags.urls')),
+    path('tinymce/', include('tinymce.urls')),
     path('', include('main.urls')),
     path('', include('register.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -4,13 +4,20 @@
 
 {% block body %}
 
-{% if user.is_authenticated %}
-  {% crispy form %}
-  {{ info }}
+  <div class="col-md-6 offset-md-3">
+    {% if user.is_authenticated %}
+      {% crispy form %}
+      {{ info }}
+    {% else %}
+      <p class="mg-sm-top mg-sm-left">Zaloguj się by dodać nową galerię</p>
+    {% endif %}
+  </div>
 
-{% else %}
-  <p class="mg-sm-top mg-sm-left">Zaloguj się by dodać nową galerię</p>
+{% endblock %}
 
-{% endif %}
+
+{% block script %}
+
+  {{ gallery_form.media }}
 
 {% endblock %}
