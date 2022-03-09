@@ -5,6 +5,11 @@ from sorl.thumbnail import ImageField
 
 # Create your models here.
 class Author(Timestamp):
+  class Meta:
+    verbose_name = "Autor"
+    verbose_name_plural = "Autorzy"
+    # Zmiana wyświetlania nazwy w PA
+  
   name = models.CharField(max_length=200)
   birth_year = models.IntegerField()
   death_year = models.IntegerField(blank=True, null=True)
@@ -18,6 +23,10 @@ class Author(Timestamp):
 
 
 class Book(Timestamp):
+  class Meta:
+    verbose_name = "Książka"
+    verbose_name_plural = "Książki"
+    
   title = models.CharField(max_length=255)
   # tytuł książki z ograniczeniem znaków
   description = models.TextField(max_length=1500)
