@@ -1,8 +1,11 @@
 from django.contrib import admin
+from django.db import models
+
 from import_export import resources
 from import_export.admin import ExportMixin
 
 from .models import Post, Category
+from common.admin import AdminImageWidget
 
 # Register your models here.
 
@@ -10,7 +13,8 @@ class PostResource(resources.ModelResource):
   class Meta:
     model = Post
     # Informacja który model chcemy importować
-
+    
+  
 @admin.register(Post)
 class PostAdmin(ExportMixin, admin.ModelAdmin): # Wygląd i zachowanie w PA
   list_display = ['id', 'title', 'created', 'modified', 'published', 'sponsored']
@@ -25,6 +29,10 @@ class PostAdmin(ExportMixin, admin.ModelAdmin): # Wygląd i zachowanie w PA
   # Umożliwia alternatywne wyświetlanie i dodawanie tagów do postó w PA
   resource_class = PostResource
   # Umożliwienie skorzystania z eksportu w PA dzięki klasie PostResource
+  formfield_overrides = {models.ImageField: {'widget': AdminImageWidget}}
+  # Określamy widget ImageField (tak by wyświetał miniaturkę zdjęcia)
+
+
 
 # admin.site.register(Post, PostAdmin)
 # # Rejestracja modeli w panelu administracyjnym (sprawienie że są widoczne)

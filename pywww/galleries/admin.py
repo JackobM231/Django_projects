@@ -1,6 +1,8 @@
 from django.contrib import admin
+from django.db import models
 
 from .models import Gallery, Photo
+from common.admin import AdminImageWidget
 
 # Register your models here.
 
@@ -13,6 +15,10 @@ class PhotoInline(admin.StackedInline):
   # Pola do odczytu po reszcie pól
   extra = 1
   # Liczba pól odpowiadających za dodanie nowych zdjęć
+  formfield_overrides = {
+    models.ImageField: {'widget': AdminImageWidget}
+    # Określamy widget ImageField (tak by wyświetał miniaturkę zdjęcia)
+  }
 
 # @admin.register(Photo)
 # class PhotoAdmin(admin.ModelAdmin):
