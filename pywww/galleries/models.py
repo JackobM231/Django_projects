@@ -20,6 +20,11 @@ class Status(models.IntegerChoices):
   PUBLISHED = 3, 'published'
 
 class Gallery(Timestamp, SlugMixin):
+  class Meta:
+    verbose_name = 'Galeria'
+    verbose_name_plural = 'Galerie'
+    # Zmiana nazw w PA
+  
   title = models.CharField(max_length=100)
   # description = models.TextField(max_length=1500, blank=True, null=True)
   description =tinymce_models.HTMLField(blank=True, null=True)

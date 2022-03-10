@@ -6,6 +6,10 @@ from sorl.thumbnail import ImageField
 # Create your models here.
 
 class Post(Timestamp):
+  class Meta:
+    verbose_name = 'Post'
+    verbose_name_plural = 'Posty'
+    
   title = models.CharField(verbose_name='Tytuł', max_length=255)
   # pole tekstowe o określonej długości
   content = models.TextField(verbose_name='Treść')
@@ -43,5 +47,6 @@ class Category(models.Model):
       return f"{self.id}. {self.name} - No description"
   
   class Meta:
-    verbose_name_plural = "categories"
+    verbose_name = 'Kategoria'
+    verbose_name_plural = 'Kategorie'
     
