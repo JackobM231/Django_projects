@@ -61,12 +61,24 @@ class HasPhotoFilter(admin.SimpleListFilter):
 class GalleryAdmin(admin.ModelAdmin):
   list_display = ['title', 'photos_count']
   # Informacje widoczne w PA po wejściu w aplikację
-  fields = ['title', 'slug', 'description', 'status', 'created', 'modified']
-  # Pola widoczne po wejściu w konkretną galerię
   readonly_fields = ['slug', 'created', 'modified']
   inlines = [PhotoInline]
   # Zapewnia wyświetlanie zdjęć należących do tej galerii w PA
   list_filter = [HasPhotoFilter]
+  # fields = ['title', 'slug', 'description', 'status', 'created', 'modified']
+  # # Pola widoczne po wejściu w konkretną galerię
+  fieldsets = (
+    ('', {
+      'fields': ('title', 'slug',),
+    }),
+    ('Opis', {
+      'fields': ('description',),
+      'description': "Tekst opisujący pole"
+    }),
+    ('Status', {
+      'fields': ('status', 'created', 'modified',),
+    }),
+  )
   
   def get_queryset(self, request):
     queryset = super().get_queryset(request)
