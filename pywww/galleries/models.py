@@ -26,6 +26,14 @@ class Gallery(Timestamp, SlugMixin):
   status = models.PositiveSmallIntegerField(default=Status.NEW, choices= Status.choices)
   # slug = models.SlugField(unique=True, max_length=150) [hide = 'hide', 'published', 'new']
   
+  # @property
+  # def photos_count(self):
+  #   '''
+  #   Pozwala na wyświetlenie dodatkowego pola w PA
+  #   z informacją o ilości zdjęć
+  #   '''
+  #   return self.photos.count()
+  
   def save(self, *args, **kwargs):
     '''
     Kiedy zapisujemy galerię ze statusem HIDE, 
